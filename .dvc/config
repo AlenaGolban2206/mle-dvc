@@ -1,0 +1,4 @@
+['remote "storage"']
+url = s3://s3-student-mle-20260205-0b892a2dbf-freetrack/mle-dvc/
+access_key_id = YCAJE3Nlz8iDILW5VTYM1ihQB
+secret_access_key = YCPjvS7uwhvJpUj3bKm8X-IX4QAwBIVsvX61IL44

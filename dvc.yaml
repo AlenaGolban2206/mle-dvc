@@ -1,0 +1,25 @@
+stages:
+  get_data:
+    cmd: python3 scripts/data.py
+    deps:
+    - scripts/data.py
+    outs:
+    - data/initial_data.csv
+  fit_model:
+    cmd: python3 scripts/fit.py
+    deps:
+    - scripts/fit.py
+    - data/initial_data.csv
+    - params.yaml
+    outs:
+    - models/fitted_model.pkl
+  evaluate_model:
+    cmd: python3 scripts/evaluate.py
+    deps:
+    - scripts/evaluate.py
+    - models/fitted_model.pkl
+    - data/initial_data.csv
+    - params.yaml
+    metrics:
+    - cv_results/cv_res.json:
+        cache: false

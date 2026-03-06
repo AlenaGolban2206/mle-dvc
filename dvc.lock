@@ -1,0 +1,58 @@
+schema: '2.0'
+stages:
+  get_data:
+    cmd: python3 scripts/data.py
+    deps:
+    - path: scripts/data.py
+      hash: md5
+      md5: 1505db36f4f507c4414e16cf04d2dde7
+      size: 1453
+    outs:
+    - path: data/initial_data.csv
+      hash: md5
+      md5: 323c05b78a8cf8f73284152ee357ad5c
+      size: 826308
+  fit_model:
+    cmd: python3 scripts/fit.py
+    deps:
+    - path: data/initial_data.csv
+      hash: md5
+      md5: 323c05b78a8cf8f73284152ee357ad5c
+      size: 826308
+    - path: params.yaml
+      hash: md5
+      md5: ddd2fed2ebcfe3302c931a751e61cdd9
+      size: 167
+    - path: scripts/fit.py
+      hash: md5
+      md5: f392aded0f7ca02a31f6504a033cc5d7
+      size: 1986
+    outs:
+    - path: models/fitted_model.pkl
+      hash: md5
+      md5: cccc0d2698120190877f52987574850c
+      size: 1101183
+  evaluate_model:
+    cmd: python3 scripts/evaluate.py
+    deps:
+    - path: data/initial_data.csv
+      hash: md5
+      md5: 323c05b78a8cf8f73284152ee357ad5c
+      size: 826308
+    - path: models/fitted_model.pkl
+      hash: md5
+      md5: cccc0d2698120190877f52987574850c
+      size: 1101183
+    - path: params.yaml
+      hash: md5
+      md5: ddd2fed2ebcfe3302c931a751e61cdd9
+      size: 167
+    - path: scripts/evaluate.py
+      hash: md5
+      md5: 0e0524e57f3daf6d2c12d732741d4d02
+      size: 1464
+    outs:
+    - path: cv_results/cv_res.json
+      hash: md5
+      md5: 33f23f5f504eca315c3e4fc52e0a1d8e
+      size: 75
