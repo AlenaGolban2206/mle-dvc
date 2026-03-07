@@ -38,8 +38,9 @@ def fit_model():
     verbose_feature_names_out=False
     )
 
-    model = LogisticRegression(params.get('penalty', 
-    l2), params.get('C', 1))
+    model = LogisticRegression(
+        penalty=params.get('penalty', 
+    'l2'), C=params.get('C', 1))
 
     pipeline = Pipeline(
     [

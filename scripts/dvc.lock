@@ -5,8 +5,8 @@ stages:
     deps:
     - path: data.py
       hash: md5
-      md5: 0cb91ccf334d3a8c724bcfb33d59cc59
-      size: 1495
+      md5: 1505db36f4f507c4414e16cf04d2dde7
+      size: 1453
     params:
       params.yaml:
         index_col: customer_id
@@ -24,8 +24,8 @@ stages:
       size: 826308
     - path: fit.py
       hash: md5
-      md5: dac8e6f20908dc11355d99d4506fed6b
-      size: 2063
+      md5: 3717251e4b7061488d0c6f501f2903a2
+      size: 2075
     params:
       params.yaml:
         C: 1

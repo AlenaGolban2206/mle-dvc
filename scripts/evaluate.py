@@ -12,7 +12,7 @@ def evaluate_model():
 
 #прочитайте файл с гиперпараметрами params.yaml
 
-    with open('params2.yaml', 'r') as fd:
+    with open('params.yaml', 'r') as fd:
         params=yaml.safe_load(fd)
 
 #загрузите результат прошлого шага: fitted_model.pkl
@@ -25,7 +25,7 @@ def evaluate_model():
 
 #реализуйте основную логику шага с использованием прочтённых гиперпараметров
 
-    cv_strategy=StratifiedKFold(n_splits=params2.get('n_splits', 5))
+    cv_strategy=StratifiedKFold(n_splits=params.get('n_splits', 5))
     cv=cross_validate(model, X, y, cv=cv_strategy, scoring=['f1', 'roc_auc'])
 
     os.makedirs('cv_results', exist_ok=True)
