@@ -1,0 +1,5 @@
+outs:
+- md5: aba7451cde30f1a2410be4a2cd07a183
+  size: 11006
+  hash: md5
+  path: models/fitted_model.pkl

@@ -1,58 +1,65 @@
 schema: '2.0'
 stages:
   get_data:
-    cmd: python3 scripts/data.py
+    cmd: python3 data.py
     deps:
-    - path: scripts/data.py
+    - path: data.py
       hash: md5
       md5: 1505db36f4f507c4414e16cf04d2dde7
       size: 1453
+    params:
+      params.yaml:
+        index_col: customer_id
     outs:
     - path: data/initial_data.csv
       hash: md5
       md5: 323c05b78a8cf8f73284152ee357ad5c
       size: 826308
   fit_model:
-    cmd: python3 scripts/fit.py
+    cmd: python3 fit.py
     deps:
     - path: data/initial_data.csv
       hash: md5
       md5: 323c05b78a8cf8f73284152ee357ad5c
       size: 826308
-    - path: params.yaml
+    - path: fit.py
       hash: md5
-      md5: ddd2fed2ebcfe3302c931a751e61cdd9
-      size: 167
-    - path: scripts/fit.py
-      hash: md5
-      md5: f392aded0f7ca02a31f6504a033cc5d7
-      size: 1986
+      md5: 3717251e4b7061488d0c6f501f2903a2
+      size: 2075
+    params:
+      params.yaml:
+        C: 1
+        index_col: customer_id
+        one_hot_drop: if_binary
+        penalty: l2
+        target_col: target
     outs:
     - path: models/fitted_model.pkl
       hash: md5
-      md5: cccc0d2698120190877f52987574850c
-      size: 1101183
+      md5: aba7451cde30f1a2410be4a2cd07a183
+      size: 11006
   evaluate_model:
-    cmd: python3 scripts/evaluate.py
+    cmd: python3 evaluate.py
     deps:
-    - path: data/initial_data.csv
-      hash: md5
-      md5: 323c05b78a8cf8f73284152ee357ad5c
-      size: 826308
-    - path: models/fitted_model.pkl
-      hash: md5
-      md5: cccc0d2698120190877f52987574850c
-      size: 1101183
-    - path: params.yaml
-      hash: md5
-      md5: ddd2fed2ebcfe3302c931a751e61cdd9
-      size: 167
-    - path: scripts/evaluate.py
+    - path: evaluate.py
       hash: md5
       md5: 0e0524e57f3daf6d2c12d732741d4d02
       size: 1464
+    - path: models/fitted_model.pkl
+      hash: md5
+      md5: aba7451cde30f1a2410be4a2cd07a183
+      size: 11006
+    params:
+      params.yaml:
+        index_col: customer_id
+        metrics:
+        - f1
+        - roc_auc
+        n_jobs: -1
+        n_splits: 5
+        target_col: target
     outs:
     - path: cv_results/cv_res.json
       hash: md5
-      md5: 33f23f5f504eca315c3e4fc52e0a1d8e
+      md5: 3589845d488ff500ca4824e14992bfad
       size: 75
