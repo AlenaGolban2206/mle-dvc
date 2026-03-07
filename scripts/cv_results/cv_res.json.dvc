@@ -1,0 +1,5 @@
+outs:
+- md5: 3589845d488ff500ca4824e14992bfad
+  size: 75
+  hash: md5
+  path: cv_res.json
