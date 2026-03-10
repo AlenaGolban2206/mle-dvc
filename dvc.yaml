@@ -2,24 +2,36 @@ stages:
   get_data:
     cmd: python3 scripts/data.py
     deps:
-    - scripts/data.py
+      - scripts/data.py
+    params:
+      - index_col
+      - retrain
     outs:
-    - data/initial_data.csv
+      - data/initial_data.csv
   fit_model:
     cmd: python3 scripts/fit.py
     deps:
-    - scripts/fit.py
-    - data/initial_data.csv
-    - params.yaml
+      - data/initial_data.csv
+      - scripts/fit.py
+    params:
+      - index_col
+      - target_col
+      - one_hot_drop
+      - auto_class_weights
+      - retrain
     outs:
-    - models/fitted_model.pkl
+      - models/fitted_model.pkl
   evaluate_model:
     cmd: python3 scripts/evaluate.py
     deps:
-    - scripts/evaluate.py
-    - models/fitted_model.pkl
-    - data/initial_data.csv
-    - params.yaml
-    metrics:
-    - cv_results/cv_res.json:
-        cache: false
+      - models/fitted_model.pkl
+      - scripts/evaluate.py
+    params:
+      - index_col
+      - target_col
+      - n_splits
+      - n_jobs
+      - metrics
+      - retrain
+    outs:
+      - cv_results/cv_res.json
