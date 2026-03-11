@@ -40,5 +40,5 @@ stages:
     outs:
     - path: cv_results/cv_res.json
       hash: md5
-      md5: d4c8c3809282657a9bb932e750f353bc
-      size: 75
+      md5: 1ed32798c696d06325360a62e68ec894
+      size: 74
