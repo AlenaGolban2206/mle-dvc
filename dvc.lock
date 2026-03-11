@@ -37,14 +37,14 @@ stages:
     outs:
     - path: models/fitted_model.pkl
       hash: md5
-      md5: 136230137fa9e5bf984939cdcf797b9f
+      md5: 12fb91662be9507f0e9b30ea5c3c0d50
       size: 1101183
   evaluate_model:
     cmd: python3 scripts/evaluate.py
     deps:
     - path: models/fitted_model.pkl
       hash: md5
-      md5: 136230137fa9e5bf984939cdcf797b9f
+      md5: 12fb91662be9507f0e9b30ea5c3c0d50
       size: 1101183
     - path: scripts/evaluate.py
       hash: md5
@@ -63,5 +63,5 @@ stages:
     outs:
     - path: cv_results/cv_res.json
       hash: md5
-      md5: 45a997fc1af6e4822496d2d27ab63538
-      size: 76
+      md5: 8de20eb175e3ce3860a92367932115e0
+      size: 75
