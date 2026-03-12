@@ -22,12 +22,12 @@ def fit_model():
     num_features = data.select_dtypes(['float'])
 
     preprocessor = ColumnTransformer([
-        ('binary', OneHotEncoder(drop='if_binary'), binary_cat_features.columns.tolist()),
+        ('binary', OneHotEncoder(drop=params['one_hot_drop']), binary_cat_features.columns.tolist()),
         ('cat', CatBoostEncoder(return_df=False), other_cat_features.columns.tolist()),
         ('num', StandardScaler(), num_features.columns.tolist())
     ], remainder='drop', verbose_feature_names_out=False)
 
-    model = CatBoostClassifier(auto_class_weights='Balanced', verbose=False)
+    model = CatBoostClassifier(auto_class_weights=params['auto_class_weights'], verbose=False)
 
     pipeline = Pipeline([
         ('preprocessor', preprocessor),
